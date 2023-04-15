@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev && npm run cron",
-    "build": "astro build",
+    "build": "astro build && npm run cron",
     "preview": "astro preview",
     "astro": "astro",
     "cron": "node --experimental-vm-modules tools/cron-import.mjs",
