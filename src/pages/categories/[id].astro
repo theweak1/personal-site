@@ -1,18 +1,21 @@
 ---
+import { getCollection } from 'astro:content'
 import CategoryPosts from '../../layouts/CategoryPosts.astro'
 
 export async function getStaticPaths() {
-  const allPosts = await Astro.glob('../posts/*.md')
-  const allTags = new Set<string>()
+  const allPosts = await getCollection('blog')
+  const allCategories = new Set<string>()
   allPosts.map(post => {
-    post.frontmatter.tags &&
-      post.frontmatter.tags.map((tag: string) => allTags.add(tag))
+    post.data.categories &&
+      post.data.categories.map((category: string) =>
+        allCategories.add(category)
+      )
   })
 
-  return Array.from(allTags).map(tag => {
+  return Array.from(allCategories).map(category => {
     return {
-      params: { id: tag.toLowerCase() },
-      props: { name: tag }
+      params: { id: category.toLowerCase() },
+      props: { name: category }
     }
   })
 }

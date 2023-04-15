@@ -1,22 +1,16 @@
-import { defineConfig } from 'astro/config'
-import sitemap from '@astrojs/sitemap'
-import react from '@astrojs/react'
 import image from '@astrojs/image'
+import react from '@astrojs/react'
+import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
+import { defineConfig } from 'astro/config'
 import addClasses from 'rehype-add-classes'
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://uses.craftz.dog/',
-  integrations: [
-    sitemap(),
-    react(),
-    image({
-      serviceEntryPoint: '@astrojs/image/sharp'
-    }),
-    tailwind()
-  ],
+  site: 'https:/theweak1/.github.io',
+  integrations: [sitemap(), react(), image(), tailwind()],
   markdown: {
+    extendDefaultPlugins: true,
     rehypePlugins: [
       [
         addClasses,
@@ -30,7 +24,9 @@ export default defineConfig({
           img: 'border border-slate-300 dark:border-zinc-700 rounded-xl mb-6',
           p: 'mb-6',
           a: 'underline underline-offset-2 hover:text-orange-500 decoration-orange-500',
-          ul: 'list-disc'
+          ul: 'max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400',
+          ol: 'list-decimal',
+          li: 'text-orange-500'
         }
       ]
     ]

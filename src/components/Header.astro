@@ -1,16 +1,21 @@
 ---
-import HeaderLink from './HeaderLink.astro'
-import { HOMEPAGE_URL } from '../config'
+import { getCollection } from 'astro:content'
 import { IoLogoGithub } from 'react-icons/io5/index.js'
-import FootprintIcon from './icons/footprint'
-import ThemeToggle from './ThemeToggleButton'
+import { HOMEPAGE_URL, SITE_TITLE } from '../consts'
 import DropdownMenu from './DropdownMenu'
+import HeaderLink from './HeaderLink.astro'
+import ThemeToggle from './ThemeToggleButton'
+import LogoIcon from './icons/arrowLogo'
 
-const allPosts = await Astro.glob('../pages/posts/*.md')
-const allTags = new Set<string>()
-allPosts.map(post => {
-  post.frontmatter.tags &&
-    post.frontmatter.tags.map((tag: string) => allTags.add(tag))
+const posts = (await getCollection('blog')).sort(
+  (a: any, b: any) =>
+    new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
+)
+
+const allCategories = new Set<string>()
+posts.map(post => {
+  post.data.categories &&
+    post.data.categories.map((category: string) => allCategories.add(category))
 })
 ---
 
@@ -19,20 +24,24 @@ allPosts.map(post => {
     <nav class="flex items-center gap-3 text-base">
       <a href="/" class="group">
         <h2 class="font-semibold tracking-tighter p-2 font-mplus text-lg">
-          <FootprintIcon />
-          Takuya Matsuyama
+          <LogoIcon />
+          Lenier Ortiz
         </h2>
       </a>
       <div class="items-center gap-6 hidden md:flex">
-        <HeaderLink href={HOMEPAGE_URL}>About</HeaderLink>
-        <HeaderLink
-          href="https://github.com/craftzdog/craftzdog-uses"
-          target="_blank"><IoLogoGithub />Source</HeaderLink
-        >
+        <HeaderLink href="/blog">Blog</HeaderLink>
+        <HeaderLink href="/about">About</HeaderLink>
+        <!-- TODO: once created another site to "host" projects, un comment line below and add the url in the const.ts file -->
+        <!-- <HeaderLink href="/">Projects</HeaderLink> -->
+
+        <HeaderLink href="https://github.com/theweak1" target="_blank">
+          <IoLogoGithub />
+          GitHub
+        </HeaderLink>
       </div>
       <div class="flex-1"></div>
       <ThemeToggle client:visible />
-      <DropdownMenu client:visible tags={Array.from(allTags)} />
+      <DropdownMenu client:visible categories={Array.from(allCategories)} />
     </nav>
   </div>
 </header>

@@ -1,0 +1,74 @@
+---
+import { getCollection } from 'astro:content'
+import BaseHead from '../../components/BaseHead.astro'
+import Body from '../../components/Body.astro'
+import Content from '../../components/Content.astro'
+import CreatedWithSection from '../../components/CreatedWithSection.astro'
+import Footer from '../../components/Footer.astro'
+import FormattedDate from '../../components/FormattedDate.astro'
+import Header from '../../components/Header.astro'
+import { BLOG_SITE_DESCRIPTION, BLOG_SITE_TITLE } from '../../consts'
+
+const posts = (await getCollection('blog')).sort(
+  (a: any, b: any) =>
+    new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
+)
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <BaseHead title={BLOG_SITE_TITLE} description={BLOG_SITE_DESCRIPTION} />
+  </head>
+  <Body>
+    <Header />
+
+    <main>
+      <section class="relative mb-6 h-80 flex justify-center items-center">
+        <div class="absolute w-full h-full overflow-hidden">
+          {
+            (
+              <img
+                class="absolute h-auto left-1/2 top-1/2 min-w-full min-h-full object-cover -translate-x-1/2 -translate-y-1/2 opacity-70"
+                src="/collection.jpg"
+              />
+            )
+          }
+        </div>
+      </section>
+      <Content>
+        <section>
+          <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {
+              posts.map(post => (
+                <li class="text-center mb-4">
+                  <FormattedDate date={post.data.pubDate} />
+                  <a href={`/blog/${post.slug}/`}>
+                    <img
+                      class="border border-slate-300 dark:border-zinc-700 rounded-xl"
+                      src={
+                        post.data.heroImage
+                          ? post.data.heroImage
+                          : '/astrojs.jpg'
+                      }
+                      width={720 * 2}
+                      alt="Thumbnail"
+                    />
+                    <div class="mt-3 text-xl">{post.data.title}</div>
+                    <div class="opacity-70">
+                      {post.data.description && (
+                        <div class="opacity-70">{post.data.description}</div>
+                      )}
+                    </div>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+        <CreatedWithSection />
+      </Content>
+    </main>
+    <Footer />
+  </Body>
+</html>

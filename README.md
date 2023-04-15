@@ -1,76 +1,69 @@
-# Takuya's curated list of the tech
+# Astro Starter Kit: Blog
 
-A curated list of the tech I use, built with Astro and Tailwind CSS
+```
+npm create astro@latest -- --template blog
+```
 
-https://uses.craftz.dog/
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/blog)
+[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/blog)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/blog/devcontainer.json)
 
-## Tutorial
+> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
-Watch how I built this website on YouTube:
 
-[![tutorial thumbnail](./docs/tutorial-thumb.jpg)](https://youtu.be/3_JE76PKBWE)
+![blog](https://user-images.githubusercontent.com/4677417/186189140-4ef17aac-c3c9-4918-a8c2-ce86ba1bb394.png)
 
-<https://youtu.be/3_JE76PKBWE>
+Features:
 
-## Stack
+- ✅ Minimal styling (make it your own!)
+- ✅ 100/100 Lighthouse performance
+- ✅ SEO-friendly with canonical URLs and OpenGraph data
+- ✅ Sitemap support
+- ✅ RSS Feed support
+- ✅ Markdown & MDX support
 
-- [Astro](https://astro.build/) - Static Website Framework
-- [Tailwind CSS](https://tailwindui.com/) - CSS Framework
-- [React](https://reactjs.org/) - Component-based UI framework for JS
-- [Headless UI](https://headlessui.com/) - Unstyled interactive components
-- [React Icons](https://react-icons.github.io/react-icons/) - Icon set
-- [Inkdrop](https://www.inkdrop.app/) - Markdown note-taking app, for writing the blog content (optional)
-
-## Project Structure
+## 🚀 Project Structure
 
 Inside of your Astro project, you'll see the following folders and files:
 
 ```
-PROJECT_ROOT
-├── public              # static assets
-│   └── posts           # images of posts
-├── src
-│   ├── components      # Astro & React components
-│   │   └── icons
-│   ├── layouts         # page layouts
-│   ├── pages           # page files
-│   │   ├── categories  # category pages
-│   │   └── posts       # .md files
-│   └── styles          # global stylesheets
-└── tools               # Inkdrop integration
+├── public/
+├── src/
+│   ├── components/
+│   ├── content/
+│   ├── layouts/
+│   └── pages/
+├── astro.config.mjs
+├── README.md
+├── package.json
+└── tsconfig.json
 ```
 
-## How to import notes from your Inkdrop local server
+Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
 
-First, please check out the [live-export](https://github.com/inkdropapp/inkdrop-live-export) documentation.
+There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
 
-Create `.env` file as following:
+The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
 
-```
-DEBUG='inkdrop:export:info,inkdrop:export:error'
-INKDROP_USERNAME='***'
-INKDROP_PASSWORD='***'
-INKDROP_PORT=***
-INKDROP_BOOKID='***'
-```
+Any static assets, like images, can be placed in the `public/` directory.
 
-Then, run the following command:
+## 🧞 Commands
 
-```sh
-npm run live-import
-```
+All commands are run from the root of the project, from a terminal:
 
-## License
+| Command                | Action                                           |
+| :--------------------- | :----------------------------------------------- |
+| `npm install`          | Installs dependencies                            |
+| `npm run dev`          | Starts local dev server at `localhost:3000`      |
+| `npm run build`        | Build your production site to `./dist/`          |
+| `npm run preview`      | Preview your build locally, before deploying     |
+| `npm run astro ...`    | Run CLI commands like `astro add`, `astro check` |
+| `npm run astro --help` | Get help using the Astro CLI                     |
 
-MIT License.
+## 👀 Want to learn more?
 
-You can create your own homepage for free without notifying me by forking this project under the following conditions:
+Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
 
-- Delete my blog content and assets
-- Add a link to [my homepage](https://www.craftz.dog/)
+## Credit
 
----
-
-Looking for a Markdown note-taking app? Check out my app called Inkdrop:
-
-[![Inkdrop](https://github.com/craftzdog/dotfiles-public/raw/master/images/inkdrop.png)](https://www.inkdrop.app/)
+This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).

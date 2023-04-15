@@ -1,10 +1,15 @@
 ---
-import { HOMEPAGE_URL } from '../config'
+import { HOMEPAGE_URL } from '../consts'
 
 const today = new Date()
 ---
 
 <footer class="text-zinc-500 p-4 text-center">
-  &copy; {today.getFullYear()}
-  <a href={HOMEPAGE_URL}>Takuya Matsuyama</a>. All rights reserved.
+  &copy; {today.getFullYear()}<a href="/"> Lenier Ortiz</a>. All rights
+  reserved.
+  <br />
+  This website is built based on the <a
+    href="https://www.craftz.dog/"
+    target="_blank">Takuya Matsuyama's website</a
+  >
 </footer>

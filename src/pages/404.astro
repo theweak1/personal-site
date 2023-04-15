@@ -1,12 +1,12 @@
 ---
+import { IoArrowForward, IoChevronForward } from 'react-icons/io5/index.js'
 import BaseHead from '../components/BaseHead.astro'
-import Header from '../components/Header.astro'
-import Footer from '../components/Footer.astro'
-import { SITE_TITLE, SITE_DESCRIPTION, HOMEPAGE_URL } from '../config'
 import Body from '../components/Body.astro'
 import Content from '../components/Content.astro'
-import { IoArrowForward, IoChevronForward } from 'react-icons/io5/index.js'
-import Masthead from '../components/Masthead.astro'
+import Footer from '../components/Footer.astro'
+import Header from '../components/Header.astro'
+import MasterHead from '../components/MasterHead.astro'
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts'
 ---
 
 <!DOCTYPE html>
@@ -17,7 +17,7 @@ import Masthead from '../components/Masthead.astro'
   <Body>
     <Header title={SITE_TITLE} />
     <main class="pt-[56px]">
-      <Masthead />
+      <MasterHead />
       <Content>
         <section>
           <h1 class="text-3xl text-center font-mplus mt-12 mb-8">
@@ -27,7 +27,7 @@ import Masthead from '../components/Masthead.astro'
             <a
               class="inline-flex items-center gap-1 underline underline-offset-2 decoration-orange-500"
               href="/"
-              >Go to Index <IoChevronForward />
+              >Go to Index <IoArrowForward />
             </a>
           </div>
         </section>
