@@ -7,9 +7,8 @@ import Content from '../components/Content.astro'
 import CreatedWithSection from '../components/CreatedWithSection.astro'
 import Footer from '../components/Footer.astro'
 import Header from '../components/Header.astro'
-import Masterhead from '../components/Masterhead.astro'
+import MasterHead from '../components/MasterHead.astro'
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts'
-
 export interface Props {
   category: string
 }
@@ -35,7 +34,7 @@ const posts = (await getCollection('blog'))
   <Body>
     <Header title={SITE_TITLE} />
     <main class="pt-[56px]">
-      <Masterhead />
+      <MasterHead />
       <Content>
         <Breadcrumb>{category}</Breadcrumb>
         <section>
