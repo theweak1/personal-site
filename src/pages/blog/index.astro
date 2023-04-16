@@ -52,6 +52,7 @@ const posts = (await getCollection('blog')).sort(
                           : '/astrojs.jpg'
                       }
                       width={720 * 2}
+                      aspectRational={2.0}
                       alt="Thumbnail"
                     />
                     <div class="mt-3 text-xl">{post.data.title}</div>

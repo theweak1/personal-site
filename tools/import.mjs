@@ -7,7 +7,7 @@ import './env.mjs'
 const notion = new Client({ auth: process.env.NOTION_API_KEY })
 
 const databaseId = process.env.NOTION_DATABASE_ID
-const assetsDir = `./public/posts/`
+const assetsDir = `./public/posts`
 
 const getDatabase = async () => {
   const response = await notion.databases.retrieve({ database_id: databaseId })
@@ -118,17 +118,25 @@ const exportPage = async page => {
           return `[![${block.embed.caption[0].plain_text}](${block.embed.url})](${block.embed.embed_url})\n\n`
         case 'image':
           const url = block.image.file.url
-          const filename = `${block.image.caption[0]?.plain_text}.jpg`
-          const filePath = `${assetsDir}/${frontmatter.title}/${filename}`
+          const filename = `${block.image.caption[0]?.plain_text.replaceAll(
+            ' ',
+            '-'
+          )}.jpg`
+          const filePath = `${assetsDir}/${filename}`
           const altText = block.image.caption[0]?.plain_text
-          if (!fs.existsSync(path.join(assetsDir, frontmatter.title))) {
-            fs.mkdirSync(path.join(assetsDir, frontmatter.title), {
+
+          if (!fs.existsSync(path.join(assetsDir))) {
+            fs.mkdirSync(path.join(assetsDir), {
               recursive: true
             })
           }
 
           if (altText && altText.toLowerCase().includes('thumbnail')) {
-            frontmatter.heroImage = filePath.replace('.', '')
+            console.log(filePath)
+            frontmatter.heroImage = filePath
+              .replace('.', '')
+              .replaceAll(' ', '-')
+              .replaceAll('/public', '')
           }
 
           if (fs.existsSync(filePath)) {
@@ -149,10 +157,9 @@ const exportPage = async page => {
             })
 
           return !altText.toLowerCase().includes('thumbnail')
-            ? `![${block.image.caption[0]?.plain_text}](<${filePath.replace(
-                '.',
-                ''
-              )}>)\n\n`
+            ? `![${block.image.caption[0]?.plain_text}](<${filePath
+                .replace('.', '')
+                .replaceAll(' ', '-')}>)\n\n`
             : ''
 
         case 'video':
@@ -213,16 +220,6 @@ const importDataBase = async () => {
       if (!page) {
         console.log(`Deleting file ${file}...`)
         fs.unlinkSync(filePath)
-
-        // Loop through all the assets directories to find the one with the same name as the fileSlug
-        for (const asset of fs.readdirSync(assetsDir)) {
-          const assetPath = path.join(assetsDir, asset)
-
-          if (fs.statSync(assetPath).isDirectory() && asset === fileSlug) {
-            console.log(`Deleting assets directory ${asset}...`)
-            fs.rmSync(assetPath, { recursive: true })
-          }
-        }
       }
     }
   }
