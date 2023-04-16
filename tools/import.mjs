@@ -122,10 +122,7 @@ const exportPage = async page => {
             ' ',
             '_'
           )}.jpg`
-          const filePath = `${assetsDir}/${frontmatter.title.replaceAll(
-            ' ',
-            '_'
-          )}/${filename}`
+          const filePath = `${assetsDir}/${filename}`
           const altText = block.image.caption[0]?.plain_text
           if (
             !fs.existsSync(
