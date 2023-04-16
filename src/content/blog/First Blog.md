@@ -4,7 +4,7 @@
   'description': 'Creating My first post',
   'pubDate': '2023-04-14T00:00:00.000Z',
   'updatedDate': '2023-04-16T23:12:00.000Z',
-  'heroImage': '/public/posts/Celebration-Thumbnail.jpg',
+  'heroImage': '/public/Celebration-Thumbnail.jpg',
   'public': 'true',
   'slug': 'first-blog-post',
   'categories': ['beginning']

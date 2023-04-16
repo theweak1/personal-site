@@ -7,7 +7,7 @@ import './env.mjs'
 const notion = new Client({ auth: process.env.NOTION_API_KEY })
 
 const databaseId = process.env.NOTION_DATABASE_ID
-const assetsDir = `./public/posts`
+const assetsDir = `./public`
 
 const getDatabase = async () => {
   const response = await notion.databases.retrieve({ database_id: databaseId })
