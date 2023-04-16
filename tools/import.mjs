@@ -7,7 +7,7 @@ import './env.mjs'
 const notion = new Client({ auth: process.env.NOTION_API_KEY })
 
 const databaseId = process.env.NOTION_DATABASE_ID
-const assetsDir = `./public/posts/`
+const assetsDir = `./public/posts`
 
 const getDatabase = async () => {
   const response = await notion.databases.retrieve({ database_id: databaseId })
@@ -120,27 +120,16 @@ const exportPage = async page => {
           const url = block.image.file.url
           const filename = `${block.image.caption[0]?.plain_text.replaceAll(
             ' ',
-            '_'
+            '-'
           )}.jpg`
           const filePath = `${assetsDir}/${filename}`
           const altText = block.image.caption[0]?.plain_text
-          if (
-            !fs.existsSync(
-              path.join(assetsDir, frontmatter.title.replaceAll(' ', '_'))
-            )
-          ) {
-            fs.mkdirSync(
-              path.join(assetsDir, frontmatter.title.replaceAll(' ', '_')),
-              {
-                recursive: true
-              }
-            )
-          }
 
           if (altText && altText.toLowerCase().includes('thumbnail')) {
+            console.log(filePath)
             frontmatter.heroImage = filePath
               .replace('.', '')
-              .replaceAll(' ', '_')
+              .replaceAll(' ', '-')
           }
 
           if (fs.existsSync(filePath)) {
@@ -163,7 +152,7 @@ const exportPage = async page => {
           return !altText.toLowerCase().includes('thumbnail')
             ? `![${block.image.caption[0]?.plain_text}](<${filePath
                 .replace('.', '')
-                .replaceAll(' ', '_')}>)\n\n`
+                .replaceAll(' ', '-')}>)\n\n`
             : ''
 
         case 'video':
@@ -224,16 +213,6 @@ const importDataBase = async () => {
       if (!page) {
         console.log(`Deleting file ${file}...`)
         fs.unlinkSync(filePath)
-
-        // Loop through all the assets directories to find the one with the same name as the fileSlug
-        for (const asset of fs.readdirSync(assetsDir)) {
-          const assetPath = path.join(assetsDir, asset)
-
-          if (fs.statSync(assetPath).isDirectory() && asset === fileSlug) {
-            console.log(`Deleting assets directory ${asset}...`)
-            fs.rmSync(assetPath, { recursive: true })
-          }
-        }
       }
     }
   }
