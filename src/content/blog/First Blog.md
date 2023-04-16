@@ -3,8 +3,8 @@
   "title": "First Blog",
   "description": "Creating My first post",
   "pubDate": "2023-04-14T00:00:00.000Z",
-  "updatedDate": "2023-04-16T23:22:00.000Z",
-  "heroImage": "/public/celebration-thumbnail.jpg",
+  "updatedDate": "2023-04-16T23:47:00.000Z",
+  "heroImage": "/posts/celebration-thumbnail.jpg",
   "public": "true",
   "slug": "first-blog-post",
   "categories": [

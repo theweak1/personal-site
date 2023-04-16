@@ -7,7 +7,7 @@ import './env.mjs'
 const notion = new Client({ auth: process.env.NOTION_API_KEY })
 
 const databaseId = process.env.NOTION_DATABASE_ID
-const assetsDir = `./public`
+const assetsDir = `./public/posts`
 
 const getDatabase = async () => {
   const response = await notion.databases.retrieve({ database_id: databaseId })
@@ -125,11 +125,18 @@ const exportPage = async page => {
           const filePath = `${assetsDir}/${filename}`
           const altText = block.image.caption[0]?.plain_text
 
+          if (!fs.existsSync(path.join(assetsDir))) {
+            fs.mkdirSync(path.join(assetsDir), {
+              recursive: true
+            })
+          }
+
           if (altText && altText.toLowerCase().includes('thumbnail')) {
             console.log(filePath)
             frontmatter.heroImage = filePath
               .replace('.', '')
               .replaceAll(' ', '-')
+              .replaceAll('/public', '')
           }
 
           if (fs.existsSync(filePath)) {
