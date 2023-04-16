@@ -118,17 +118,32 @@ const exportPage = async page => {
           return `[![${block.embed.caption[0].plain_text}](${block.embed.url})](${block.embed.embed_url})\n\n`
         case 'image':
           const url = block.image.file.url
-          const filename = `${block.image.caption[0]?.plain_text}.jpg`
-          const filePath = `${assetsDir}/${frontmatter.title}/${filename}`
+          const filename = `${block.image.caption[0]?.plain_text.replaceAll(
+            ' ',
+            '_'
+          )}.jpg`
+          const filePath = `${assetsDir}/${frontmatter.title.replaceAll(
+            ' ',
+            '_'
+          )}/${filename}`
           const altText = block.image.caption[0]?.plain_text
-          if (!fs.existsSync(path.join(assetsDir, frontmatter.title))) {
-            fs.mkdirSync(path.join(assetsDir, frontmatter.title), {
-              recursive: true
-            })
+          if (
+            !fs.existsSync(
+              path.join(assetsDir, frontmatter.title.replaceAll(' ', '_'))
+            )
+          ) {
+            fs.mkdirSync(
+              path.join(assetsDir, frontmatter.title.replaceAll(' ', '_')),
+              {
+                recursive: true
+              }
+            )
           }
 
           if (altText && altText.toLowerCase().includes('thumbnail')) {
-            frontmatter.heroImage = filePath.replace('.', '')
+            frontmatter.heroImage = filePath
+              .replace('.', '')
+              .replaceAll(' ', '_')
           }
 
           if (fs.existsSync(filePath)) {
@@ -149,10 +164,9 @@ const exportPage = async page => {
             })
 
           return !altText.toLowerCase().includes('thumbnail')
-            ? `![${block.image.caption[0]?.plain_text}](<${filePath.replace(
-                '.',
-                ''
-              )}>)\n\n`
+            ? `![${block.image.caption[0]?.plain_text}](<${filePath
+                .replace('.', '')
+                .replaceAll(' ', '_')}>)\n\n`
             : ''
 
         case 'video':
