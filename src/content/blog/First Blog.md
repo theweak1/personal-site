@@ -1,17 +1,23 @@
 ---
 {
-  'title': 'First Blog',
-  'description': 'Creating My first post',
-  'pubDate': '2023-04-14T00:00:00.000Z',
-  'updatedDate': '2023-04-16T23:12:00.000Z',
-  'heroImage': '/public/Celebration-Thumbnail.jpg',
-  'public': 'true',
-  'slug': 'first-blog-post',
-  'categories': ['beginning']
+  "title": "First Blog",
+  "description": "Creating My first post",
+  "pubDate": "2023-04-14T00:00:00.000Z",
+  "updatedDate": "2023-04-16T23:22:00.000Z",
+  "heroImage": "/public/celebration-thumbnail.jpg",
+  "public": "true",
+  "slug": "first-blog-post",
+  "categories": [
+    "beginning"
+  ]
 }
 ---
 
 # Starting Small
+
+
+
+
 
 As I sit down to write this post, I can't help but feel excited about this new adventure I'm embarking on. I've always been interested in technology and learning new things, and starting this blog is the perfect way to share my knowledge and experiences with others.
 
@@ -28,3 +34,6 @@ Of course, Node.js isn't the only technology that I'm excited to talk about. The
 Starting this blog is just the beginning for me. I can't wait to see where this journey takes me and all the amazing things that I will learn along the way. I hope that my experiences and insights will be helpful to others who are just starting out or who are looking to expand their knowledge.
 
 In conclusion, I'm incredibly excited to start this new adventure of creating a blog. It's a way for me to share my passion for technology and programming with others, and I'm looking forward to connecting with like-minded individuals. I'm excited to talk about the technologies that I've learned so far, including Node.js, and to share the challenges and good things that have come from my experience. I can't wait to see where this journey takes me and what new things I will learn in the process.
+
+
+
