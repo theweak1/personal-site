@@ -42,7 +42,7 @@ const posts = (await getCollection('blog'))
             {
               posts.map(post => (
                 <li class="text-center mb-4">
-                  <a href={`/blog/${post.slug}`}>
+                  <a href={`${post.slug}`}>
                     <img
                       class="border border-slate-300 dark:border-zinc-700 rounded-xl"
                       src={post.data.heroImage}
