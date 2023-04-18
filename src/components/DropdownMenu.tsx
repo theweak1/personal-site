@@ -1,6 +1,6 @@
 import { Menu, Transition } from '@headlessui/react'
 import React, { Fragment } from 'react'
-import { IoMenu } from 'react-icons/io5/index.js'
+import { IoLogoGithub, IoMenu } from 'react-icons/io5/index.js'
 import DropdownMenuItem from './DropdownMenuItem'
 
 interface Props {
@@ -28,7 +28,31 @@ export default function DropdownMenu({ categories }: Props) {
         leaveTo="transform opacity-0 scale-95"
       >
         <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md border border-zinc-400 dark:border-zinc-700 bg-orange-50 dark:bg-zinc-800 shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none divide-zinc-400 dark:divide-zinc-700">
-          <div className="py1">
+          <div className="md:hidden">
+            <DropdownMenuItem href="/">Home</DropdownMenuItem>
+            <DropdownMenuItem href="/blog">Blog</DropdownMenuItem>
+            <DropdownMenuItem href="/about">About</DropdownMenuItem>
+            <DropdownMenuItem href="https://github.com/theweak1">
+              <IoLogoGithub className="inline-block mr-2" />
+              GitHub
+            </DropdownMenuItem>
+            <div className="py1  border border-zinc-300">
+              <div className="px-3 py-2 uppercase font-bold text-xs">
+                Categories
+              </div>
+              {categories.map(category => {
+                return (
+                  <DropdownMenuItem
+                    key={category}
+                    href={`/categories/${category.toLowerCase()}`}
+                  >
+                    {category}
+                  </DropdownMenuItem>
+                )
+              })}
+            </div>
+          </div>
+          <div className="py1 hidden md:block border border-zinc-300">
             <div className="px-3 py-2 uppercase font-bold text-xs">
               Categories
             </div>
