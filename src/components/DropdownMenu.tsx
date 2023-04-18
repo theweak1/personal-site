@@ -1,6 +1,6 @@
 import { Menu, Transition } from '@headlessui/react'
 import React, { Fragment } from 'react'
-import { IoLogoGithub, IoMenu } from 'react-icons/io5'
+import { IoLogoGithub, IoMenu } from 'react-icons/io5/index.js'
 import DropdownMenuItem from './DropdownMenuItem'
 
 interface Props {
