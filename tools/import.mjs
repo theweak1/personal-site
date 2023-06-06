@@ -117,7 +117,9 @@ const exportPage = async page => {
         case 'embed':
           return `[![${block.embed.caption[0].plain_text}](${block.embed.url})](${block.embed.embed_url})\n\n`
         case 'image':
-          const url = block.image.file.url
+          const url = block.image.file
+            ? block.image.file.url
+            : block.image.external.url
           const filename = `${block.image.caption[0]?.plain_text.replaceAll(
             ' ',
             '-'

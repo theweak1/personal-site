@@ -20,6 +20,7 @@
     "@astrojs/vercel": "^3.2.4",
     "@headlessui/react": "^1.7.14",
     "@types/react-dom": "^18.0.11",
+    "@vercel/analytics": "^1.0.0",
     "astro": "^2.3.0",
     "node-cron": "^3.0.2",
     "react": "^18.2.0",
